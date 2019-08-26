@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %}
+{% block r_box %}
+    <main class="r_box">
+        {% for article in articles %}
+
+            <li>
+                <i><a href="{{ article.img }}" target="_blank"><img src="{{ article.img }}"></a></i>
+                <h3><a href="{{ url_for("blog.detail", id=article.id) }}">{{ article.title }}</a></h3>
+                <p>{{ article.description }}</p>
+            </li>
+        {% endfor %}
+    </main>
+{% endblock %}
