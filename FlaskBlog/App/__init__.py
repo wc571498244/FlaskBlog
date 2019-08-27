@@ -1,6 +1,6 @@
 import os
 from flask import Flask
-from .views import blog
+from .views import blog, admin
 from .exts import init_exts
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,6 +19,7 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     # 注册蓝图
     app.register_blueprint(blueprint=blog)
+    app.register_blueprint(blueprint=admin)
 
     # 初始化插件
     init_exts(app)
