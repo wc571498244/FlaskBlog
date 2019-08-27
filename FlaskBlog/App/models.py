@@ -31,5 +31,4 @@ class Article(db.Model):
 class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(50))
-    ab = db.Column(db.String(50))
-    articles = db.relationship('Article', backref='tags', secondary=article_tags, lazy='dynamic')
+    articles = db.relationship('Article', backref='tag1', secondary=article_tags, lazy=True)

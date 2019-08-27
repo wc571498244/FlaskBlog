@@ -15,6 +15,7 @@ def index():
         "title": "首页",
         "article_type": article_type,
     }
+    print("-----------" * 20)
     for i in article_type:
         print(len(i.articles))
     return render_template("blog/index.html", **data)
@@ -24,8 +25,8 @@ def index():
 @blog.route('/detail/<int:id>/')
 def detail(id):
     article = Article.query.get(id)
-    tags = article.tags
     article_type = ArticleType.query.filter().all()
+    tags = article.tag1
     data = {
         "title": "文章详情",
         "article": article,

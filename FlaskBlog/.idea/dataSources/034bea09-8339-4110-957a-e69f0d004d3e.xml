@@ -921,5 +921,146 @@
       <Charset>utf8mb4</Charset>
       <DefaultForCharset>0</DefaultForCharset>
     </collation>
+    <table id="232" parent="3" name="alembic_version"/>
+    <table id="233" parent="3" name="article"/>
+    <table id="234" parent="3" name="article_tags"/>
+    <table id="235" parent="3" name="article_type"/>
+    <table id="236" parent="3" name="tag"/>
+    <column id="237" parent="232" name="version_num">
+      <Position>1</Position>
+      <DataType>varchar(32)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="238" parent="232" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>version_num</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="239" parent="233" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="240" parent="233" name="title">
+      <Position>2</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="241" parent="233" name="content">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="242" parent="233" name="create_time">
+      <Position>4</Position>
+      <DataType>datetime|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="243" parent="233" name="click_num">
+      <Position>5</Position>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="244" parent="233" name="description">
+      <Position>6</Position>
+      <DataType>varchar(200)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="245" parent="233" name="img">
+      <Position>7</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="246" parent="233" name="article_type">
+      <Position>8</Position>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="247" parent="233" name="article_type">
+      <ColNames>article_type</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="248" parent="233" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="249" parent="233" name="article_ibfk_1">
+      <ColNames>article_type</ColNames>
+      <RefSchemaName>flaskblog</RefSchemaName>
+      <RefTableName>article_type</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="250" parent="234" name="article_id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="251" parent="234" name="tag_id">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="252" parent="234" name="tag_id">
+      <ColNames>tag_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="253" parent="234" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>article_id
+tag_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="254" parent="234" name="article_tags_ibfk_1">
+      <ColNames>article_id</ColNames>
+      <RefSchemaName>flaskblog</RefSchemaName>
+      <RefTableName>article</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="255" parent="234" name="article_tags_ibfk_2">
+      <ColNames>tag_id</ColNames>
+      <RefSchemaName>flaskblog</RefSchemaName>
+      <RefTableName>tag</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="256" parent="235" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="257" parent="235" name="name">
+      <Position>2</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="258" parent="235" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="259" parent="236" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="260" parent="236" name="name">
+      <Position>2</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="261" parent="236" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
   </database-model>
 </dataSource>
