@@ -11,8 +11,14 @@
                 <h3 class="news_title">{{ article.title }}</h3>
                 <div class="bloginfo">
                     <ul>
-                        <li class="author">作者：<a href="/">杨青</a></li>
-                        <li class="lmname"><a href="/">{{ article.articletype.name }}</a></li>
+                        <li class="author">
+                            作者：<a href="/">wc</a>
+                        </li>
+                        <li class="lmname">
+                            <a href="{{ url_for("blog.typelist", id= article.articletype.id) }}" target="_self">
+                                {{ article.articletype.name }}
+                            </a>
+                        </li>
                         <li class="timer">时间：{{ article.create_time }}</li>
                         <li class="view">{{ article.click_num }}人已阅读</li>
                     </ul>
@@ -25,7 +31,7 @@
                 <div class="news_about"><strong>简介</strong>个人博客，用来做什么？我刚开始就把它当做一个我吐槽心情的地方，也就相当于一个网络记事本，写上一些关于自己生活工作中的小情小事，也会放上一些照片，音乐。每天工作回家后就能访问自己的网站，一边听着音乐，一边写写文章。
                 </div>
                 <div class="news_con">
-                    {{ article.content }}
+                    {{ article.content | safe }}
                 </div>
             </div>
             <div class="share">
@@ -114,7 +120,7 @@
                             "                        </div>");
                         alert(data.msg);
 
-                        $(".saying").find("a").html("共有"+$(".fb").length+"条评论");
+                        $(".saying").find("a").html("共有" + $(".fb").length + "条评论");
                     } else if (data.code == 1001) {
                         alert(data.msg);
                     } else {
