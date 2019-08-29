@@ -77,13 +77,12 @@ def detail(id):
 
 
 # 分类列表
-
 @blog.route("/typelist/<int:id>/")
 # @cache.cached(timeout=60 * 3)
 def typelist(id):
     page = request.args.get('page', 1, type=int)
     type = ArticleType.query.get(id)
-    articles = Article.query.filter_by(article_type=type.id)
+    articles = Article.query.filter_by(article_type=type.id).order_by(desc("create_time"))
     data = {
         "articles": articles,
         "title": "首页",
@@ -135,10 +134,121 @@ def article_comment():
 # 后台管理首页
 @admin.route("/admin/index/")
 def admin_index():
-    return render_template("admin/index.html")
+    data = {
+        "active1": "active",
+    }
+    return render_template("admin/index.html", **data)
 
 
 # 后台文章管理
 @admin.route("/admin/article/")
 def admin_article():
-    return render_template("admin/article.html")
+    articles = Article.query.order_by(desc("create_time")).all()
+    data = {
+        "articles": articles,
+        "active2": "active",
+    }
+    return render_template("admin/article.html", **data)
+
+
+# 文章修改
+@admin.route("/admin/updatearticle/<int:id>/", methods=["GET", "POST"])
+def update_article(id):
+    if request.method == "GET":
+        article = Article.query.get(id)
+        tags = Tag.query.all()
+        types = ArticleType.query.all()
+        data = {
+            "article": article,
+            'tags': tags,
+            "types": types,
+            "active2": "active",
+        }
+        return render_template("admin/update-article.html", **data)
+    elif request.method == "POST":
+        # 获取表单提交上来的数据
+        title = request.form.get("title")
+        content = request.form.get("content")
+        tags = request.form.getlist("tags")
+        type = request.form.get("category")
+        description = request.form.get("describe")
+        img = request.form.get("titlepic")
+        print(img)
+        # 查找对应的文章
+        article = Article.query.get(id)
+        # 修改数据
+        article.title = title
+        article.content = content
+        article.description = description
+        article.img = img
+        article.articletype = ArticleType.query.get(type)
+        tag_list = []
+        for i in tags:
+            tag = Tag.query.get(i)
+            tag_list.append(tag)
+        article.tag1 = tag_list
+        # 提交
+        db.session.commit()
+        return redirect(url_for("admin.update_article", id=id))
+
+
+# 文章删除
+@admin.route('/admin/delarticle/')
+def del_article():
+    article_id = request.args.get("article_id")
+    article = Article.query.get(article_id)
+    data = {
+        "code": 1000,
+        "msg": ""
+    }
+    if not article:
+        data['code'] = 1002
+        data['msg'] = "文章不存在！"
+        return jsonify(data)
+    try:
+        db.session.delete(article)
+        db.session.commit()
+    except:
+        data['code'] = 1001
+        data['msg'] = "删除失败请重试！"
+        return jsonify(data)
+    data['msg'] = "文章删除成功！"
+    return jsonify(data)
+
+
+# 文章增加
+@admin.route('/admin/addarticle/', methods=["GET", "POST"])
+def add_article():
+    if request.method == "GET":
+        tags = Tag.query.all()
+        types = ArticleType.query.all()
+        data = {
+            'tags': tags,
+            "active2": "active",
+            "types": types,
+        }
+        return render_template("admin/add-article.html", **data)
+    elif request.method == "POST":
+        # 获取表单提交上来的数据
+        title = request.form.get("title")
+        content = request.form.get("content")
+        tags = request.form.getlist("tags")
+        type = request.form.get("category")
+        description = request.form.get("describe")
+        img = request.form.get("titlepic")
+        article = Article()
+        # 新增数据
+        article.title = title
+        article.content = content
+        article.description = description
+        article.img = img
+        article.create_time = datetime.datetime.now()
+        article.articletype = ArticleType.query.get(type)
+        tag_list = []
+        for i in tags:
+            tag = Tag.query.get(i)
+            tag_list.append(tag)
+        article.tag1 = tag_list
+        # 提交
+        db.session.commit()
+        return redirect(url_for("admin.admin_article"))
