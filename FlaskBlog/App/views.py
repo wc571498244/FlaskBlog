@@ -55,6 +55,12 @@ def detail(id):
     # 评论列表
     comments = Comment.query.filter_by(article_id=id).all()
 
+    # 下一篇文章
+    next_article = Article.query.filter(Article.create_time.__lt__(article.create_time)).all()[-1]
+
+    # 上一篇文章
+    prev_article = Article.query.filter(Article.create_time.__gt__(article.create_time)).first()
+
     # 点击量统计(一个ip15分钟内只能算一个点击)
     # ip个文章id都要算进来
     ip = request.remote_addr
@@ -70,7 +76,9 @@ def detail(id):
         "title": "文章详情",
         "article": article,
         "tags": tags,
-        "comments": comments
+        "comments": comments,
+        "prev_article": prev_article,
+        "next_article": next_article,
     }
     data.update(get_same_info())
     return render_template("blog/detail.html", **data)
@@ -141,12 +149,13 @@ def admin_index():
 
 
 # 后台文章管理
-@admin.route("/admin/article/")
-def admin_article():
-    articles = Article.query.order_by(desc("create_time")).all()
+@admin.route("/admin/article/<int:page>/")
+def admin_article(page):
+    pagination = Article.query.order_by(desc("create_time")).paginate(page, per_page=10, error_out=False)
     data = {
-        "articles": articles,
+        "articles": pagination.items,
         "active2": "active",
+        "pagination": pagination,
     }
     return render_template("admin/article.html", **data)
 
@@ -251,4 +260,16 @@ def add_article():
         article.tag1 = tag_list
         # 提交
         db.session.commit()
-        return redirect(url_for("admin.admin_article"))
+        return redirect(url_for("admin.admin_article", page=1))
+
+
+# 文章删除全部
+@admin.route("/admin/delallarticle/", methods=["POST"])
+def del_all_article():
+    article_ids = request.form.getlist("checkbox[]")
+
+    for i in article_ids:
+        article = Article.query.get(i)
+        db.session.delete(article)
+        db.session.commit()
+    return redirect(url_for("admin.admin_article", page=1))
