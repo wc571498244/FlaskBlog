@@ -3,10 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="0b5d5a3c-60e1-4ae2-986c-63737e865b4a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/App/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/App/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/article.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/article.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/admin/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/blog/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blog/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/category.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/category.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/comment.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/comment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/update-category.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/update-category.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,32 +47,51 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.6731183">
+    <splitter split-orientation="horizontal" split-proportion="0.6333907">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/templates/admin/index.html">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/App/views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1666">
-                  <caret line="98" column="10" selection-start-line="98" selection-start-column="10" selection-end-line="98" selection-end-column="10" />
+                <state relative-caret-position="378">
+                  <caret line="464" column="11" selection-start-line="464" selection-start-column="11" selection-end-line="464" selection-end-column="11" />
+                  <folding>
+                    <element signature="e#0#81#0" expanded="true" />
+                    <element signature="e#804#1074#0" />
+                    <element signature="e#1110#1156#0" />
+                    <element signature="e#1219#2175#0" />
+                    <element signature="e#2274#2716#0" />
+                    <element signature="e#2804#3733#0" />
+                    <element signature="e#3798#3896#0" />
+                    <element signature="e#3980#4258#0" />
+                  </folding>
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/templates/admin/base.html">
+            <entry file="file://$PROJECT_DIR$/templates/admin/article.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1037">
-                  <caret line="61" column="82" selection-start-line="61" selection-start-column="69" selection-end-line="61" selection-end-column="82" />
+                <state relative-caret-position="42">
+                  <caret line="96" column="14" lean-forward="true" selection-start-line="96" selection-start-column="14" selection-end-line="96" selection-end-column="14" />
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/templates/admin/add-article.html">
+            <entry file="file://$PROJECT_DIR$/templates/admin/update-tag.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1343">
-                  <caret line="79" column="78" selection-start-line="79" selection-start-column="78" selection-end-line="79" selection-end-column="78" />
+                <state relative-caret-position="135">
+                  <caret line="9" column="72" selection-start-line="9" selection-start-column="72" selection-end-line="9" selection-end-column="72" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/templates/admin/tags.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="350">
+                  <caret line="71" column="43" selection-start-line="71" selection-start-column="43" selection-end-line="71" selection-end-column="43" />
                 </state>
               </provider>
             </entry>
@@ -78,8 +99,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/App/models.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="374">
-                  <caret line="24" column="39" selection-start-line="24" selection-start-column="39" selection-end-line="24" selection-end-column="39" />
+                <state relative-caret-position="336">
+                  <caret line="46" column="14" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="14" />
                   <folding>
                     <element signature="e#0#15#0" expanded="true" />
                   </folding>
@@ -87,20 +108,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/templates/admin/article.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="396">
-                  <caret line="84" column="103" selection-start-line="84" selection-start-column="103" selection-end-line="84" selection-end-column="103" />
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/templates/blog/detail.html">
+            <entry file="file://$PROJECT_DIR$/templates/admin/base.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="935">
-                  <caret line="55" column="53" selection-start-line="55" selection-start-column="53" selection-end-line="55" selection-end-column="53" />
+                <state relative-caret-position="371">
+                  <caret line="275" column="66" selection-start-line="275" selection-start-column="66" selection-end-line="275" selection-end-column="66" />
                 </state>
               </provider>
             </entry>
@@ -110,44 +122,16 @@
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/App/views.py">
+            <entry file="file://$PROJECT_DIR$/templates/admin/comment.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="364">
-                  <caret line="160" selection-start-line="159" selection-end-line="160" />
+                <state relative-caret-position="316">
+                  <caret line="130" column="52" selection-start-line="130" selection-start-column="52" selection-end-line="130" selection-end-column="52" />
                   <folding>
-                    <element signature="e#0#81#0" expanded="true" />
-                    <element signature="e#1110#1156#0" />
+                    <element signature="e#2819#2826#1#HTML" expanded="true" />
+                    <element signature="e#3898#3905#1#HTML" expanded="true" />
+                    <element signature="e#4500#5315#0#HTML" />
+                    <element signature="e#3737#3809#0#HTML" />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/App/__init__.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="306">
-                  <caret line="21" selection-start-line="21" selection-end-line="21" />
-                  <folding>
-                    <element signature="e#0#9#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="das://034bea09-8339-4110-957a-e69f0d004d3e/schema/flaskblog/table/article">
-              <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-                <state projectRestartId="0759245a-1221-4c36-9538-f982428408ce">
-                  <filtering />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/templates/admin/update-article.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1054">
-                  <caret line="62" column="46" lean-forward="true" selection-start-line="62" selection-start-column="46" selection-end-line="62" selection-end-column="46" />
                 </state>
               </provider>
             </entry>
@@ -179,7 +163,22 @@
       <find>category</find>
       <find>tags</find>
       <find>admin_article</find>
+      <find>1000</find>
+      <find>1001</find>
+      <find>del_type</find>
+      <find>updatetype</find>
+      <find>update_type</find>
+      <find>修改</find>
+      <find>type</find>
+      <find>bootstrap</find>
+      <find>jq</find>
+      <find>paginator</find>
+      <find>paginat</find>
+      <find>see_comment</find>
     </findStrings>
+    <replaceStrings>
+      <replace>tag</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="ROOT_SYNC" value="DONT_SYNC" />
@@ -202,21 +201,25 @@
         <option value="$PROJECT_DIR$/templates/blog/typelist.html" />
         <option value="$PROJECT_DIR$/templates/admin/index.html" />
         <option value="$PROJECT_DIR$/templates/admin/update-article.html" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
         <option value="$PROJECT_DIR$/templates/admin/add-article.html" />
-        <option value="$PROJECT_DIR$/App/models.py" />
         <option value="$PROJECT_DIR$/templates/blog/detail.html" />
-        <option value="$PROJECT_DIR$/templates/admin/base.html" />
-        <option value="$PROJECT_DIR$/App/views.py" />
         <option value="$PROJECT_DIR$/templates/admin/article.html" />
+        <option value="$PROJECT_DIR$/App/models.py" />
+        <option value="$PROJECT_DIR$/templates/admin/category.html" />
+        <option value="$PROJECT_DIR$/templates/admin/update-tag.html" />
+        <option value="$PROJECT_DIR$/templates/admin/tags.html" />
+        <option value="$PROJECT_DIR$/templates/admin/update-category.html" />
+        <option value="$PROJECT_DIR$/templates/admin/base.html" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
+        <option value="$PROJECT_DIR$/templates/admin/comment.html" />
+        <option value="$PROJECT_DIR$/App/views.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="400" />
-    <option name="y" value="195" />
-    <option name="width" value="1285" />
-    <option name="height" value="850" />
+    <option name="x" value="950" />
+    <option name="width" value="980" />
+    <option name="height" value="1040" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -226,7 +229,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -254,6 +256,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -262,21 +265,21 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="database.console.LAST_STATE" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Torando/Day04/code/TuLingPro" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/admin" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\qianfeng\05.Back-end\Flask\FlaskBlog" />
-      <recent name="D:\qianfeng\05.Back-end\Flask\FlaskBlog\App" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\qianfeng\05.Back-end\Flask\FlaskBlog\FlaskBlog\templates\admin" />
       <recent name="D:\qianfeng\05.Back-end\Flask\FlaskBlog\templates\blog" />
       <recent name="D:\qianfeng\05.Back-end\Flask\FlaskBlog\App\templates\blog" />
       <recent name="D:\qianfeng\05.Back-end\Flask\FlaskBlog\App\static" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\qianfeng\05.Back-end\Flask\FlaskBlog" />
+      <recent name="D:\qianfeng\05.Back-end\Flask\FlaskBlog\App" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -328,12 +331,14 @@
       <workItem from="1566992622412" duration="9103000" />
       <workItem from="1567038196269" duration="3598000" />
       <workItem from="1567075451372" duration="11738000" />
-      <workItem from="1567124292504" duration="355000" />
+      <workItem from="1567124292504" duration="2620000" />
+      <workItem from="1567156565946" duration="8810000" />
+      <workItem from="1567211712936" duration="11632000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61968000" />
+    <option name="totallyTimeSpent" value="84675000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -348,16 +353,16 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.06568365" />
+      <window_info content_ui="combo" id="Project" order="1" weight="0.1494638" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="1" />
       <window_info anchor="bottom" id="Version Control" order="2" />
       <window_info anchor="bottom" id="Python Console" order="3" weight="0.32991204" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="4" visible="true" weight="0.19501466" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="4" visible="true" weight="0.30351907" />
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Database Console" order="6" weight="0.28696924" />
       <window_info anchor="bottom" id="Message" order="7" />
-      <window_info anchor="bottom" id="Find" order="8" />
+      <window_info anchor="bottom" id="Find" order="8" weight="0.32991204" />
       <window_info anchor="bottom" id="Run" order="9" />
       <window_info anchor="bottom" id="Debug" order="10" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="11" weight="0.25" />
@@ -368,7 +373,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" weight="0.3297587" />
-      <window_info anchor="right" id="Database" order="4" weight="0.22117962" />
+      <window_info anchor="right" id="Database" order="4" visible="true" weight="0.22117962" />
     </layout>
     <layout-to-restore>
       <window_info id="Favorites" order="0" side_tool="true" />
@@ -399,17 +404,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app.py" />
-    <entry file="file://D:/Python virtualenvs/flask/Lib/site-packages/flask_script/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="151" selection-start-line="151" selection-end-line="151" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/034bea09-8339-4110-957a-e69f0d004d3e/console.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/App/static/admin/js/respond.min.js" />
     <entry file="file://$PROJECT_DIR$/App/templates/blog/base.html" />
     <entry file="file://$PROJECT_DIR$/App/templates/blog/index.html" />
@@ -467,25 +461,7 @@
     <entry file="file://$PROJECT_DIR$/migrations/versions/dd8e4b85d70b_.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="das://034bea09-8339-4110-957a-e69f0d004d3e/schema/flaskblog/table/article_type">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="be0099be-8473-4d3f-942d-53001f962d00">
-          <filtering>
-            <filter text="" />
-          </filtering>
-        </state>
-      </provider>
-    </entry>
     <entry file="das://034bea09-8339-4110-957a-e69f0d004d3e/schema/flaskblog/table/article_tags">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="be0099be-8473-4d3f-942d-53001f962d00">
-          <filtering>
-            <filter text="" />
-          </filtering>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://034bea09-8339-4110-957a-e69f0d004d3e/schema/flaskblog/table/tag">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state projectRestartId="be0099be-8473-4d3f-942d-53001f962d00">
           <filtering>
@@ -497,15 +473,6 @@
     <entry file="file://$PROJECT_DIR$/migrations/versions/cc274bcd0f0c_.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-250" />
-      </provider>
-    </entry>
-    <entry file="das://034bea09-8339-4110-957a-e69f0d004d3e/schema/flaskblog/table/comment">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="d42162ad-b120-4baf-8788-85dda5b9daf2">
-          <filtering>
-            <filter text="" />
-          </filtering>
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static/blog/css/base.css">
@@ -522,16 +489,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="16" column="22" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/exts.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -569,9 +526,6 @@
     <entry file="file://$PROJECT_DIR$/static/admin/css/bootstrap.min.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/update-category.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/blog/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1241">
@@ -586,30 +540,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1037">
-          <caret line="61" column="82" selection-start-line="61" selection-start-column="69" selection-end-line="61" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/add-article.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1343">
-          <caret line="79" column="78" selection-start-line="79" selection-start-column="78" selection-end-line="79" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="24" column="39" selection-start-line="24" selection-start-column="39" selection-end-line="24" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/blog/detail.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="935">
@@ -617,53 +547,171 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/article.html">
+    <entry file="file://$PROJECT_DIR$/templates/admin/add-article.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="84" column="103" selection-start-line="84" selection-start-column="103" selection-end-line="84" selection-end-column="103" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="160" selection-start-line="159" selection-end-line="160" />
-          <folding>
-            <element signature="e#0#81#0" expanded="true" />
-            <element signature="e#1110#1156#0" />
-            <element signature="e#1219#1876#0" />
-            <element signature="e#1975#2387#0" />
-            <element signature="e#2475#3404#0" />
-            <element signature="e#3469#3567#0" />
-            <element signature="e#3941#5152#0" />
-            <element signature="e#5220#5701#0" />
-            <element signature="e#5794#6881#0" />
-            <element signature="e#7349#7548#0" />
-          </folding>
+        <state relative-caret-position="488">
+          <caret line="79" column="78" selection-start-line="79" selection-start-column="78" selection-end-line="79" selection-end-column="78" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/App/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        <state relative-caret-position="136">
+          <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#189#746#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://034bea09-8339-4110-957a-e69f0d004d3e/schema/flaskblog/table/article">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="0759245a-1221-4c36-9538-f982428408ce">
-          <filtering />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/admin/update-article.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
+        <state relative-caret-position="-964">
           <caret line="62" column="46" lean-forward="true" selection-start-line="62" selection-start-column="46" selection-end-line="62" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://034bea09-8339-4110-957a-e69f0d004d3e/schema/flaskblog/table/article_type">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="fc1bff28-032c-4570-a489-a9cc837530e6">
+          <filtering />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/category.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="85" column="49" selection-start-line="85" selection-start-column="49" selection-end-line="85" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/exts.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/update-tag.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="72" selection-start-line="9" selection-start-column="72" selection-end-line="9" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://034bea09-8339-4110-957a-e69f0d004d3e/schema/flaskblog/table/tag">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="fc1bff28-032c-4570-a489-a9cc837530e6">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/admin/js/jquery-2.1.4.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="14977" selection-start-line="3" selection-start-column="14959" selection-end-line="3" selection-end-column="14977" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/update-category.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="9" lean-forward="true" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Python virtualenvs/flask/Lib/site-packages/sqlalchemy/orm/query.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="958" selection-start-line="958" selection-end-line="958" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/tags.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="71" column="43" selection-start-line="71" selection-start-column="43" selection-end-line="71" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="371">
+          <caret line="275" column="66" selection-start-line="275" selection-start-column="66" selection-end-line="275" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://034bea09-8339-4110-957a-e69f0d004d3e/schema/flaskblog/table/article">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="fc1bff28-032c-4570-a489-a9cc837530e6">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="46" column="14" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/article.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="96" column="14" lean-forward="true" selection-start-line="96" selection-start-column="14" selection-end-line="96" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="464" column="11" selection-start-line="464" selection-start-column="11" selection-end-line="464" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#81#0" expanded="true" />
+            <element signature="e#804#1074#0" />
+            <element signature="e#1110#1156#0" />
+            <element signature="e#1219#2175#0" />
+            <element signature="e#2274#2716#0" />
+            <element signature="e#2804#3733#0" />
+            <element signature="e#3798#3896#0" />
+            <element signature="e#3980#4258#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://034bea09-8339-4110-957a-e69f0d004d3e/schema/flaskblog/table/comment">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="fc1bff28-032c-4570-a489-a9cc837530e6">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/comment.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="130" column="52" selection-start-line="130" selection-start-column="52" selection-end-line="130" selection-end-column="52" />
+          <folding>
+            <element signature="e#2819#2826#1#HTML" expanded="true" />
+            <element signature="e#3898#3905#1#HTML" expanded="true" />
+            <element signature="e#4500#5315#0#HTML" />
+            <element signature="e#3737#3809#0#HTML" />
+          </folding>
         </state>
       </provider>
     </entry>

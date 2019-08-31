@@ -60,9 +60,10 @@
             <ul class="nav nav-sidebar">
                 <li class="{{ active1 }}"><a href="{{ url_for("admin.admin_index") }}">报告</a></li>
                 <li class="{{ active2 }}"><a href="{{ url_for("admin.admin_article",page=1) }}">文章</a></li>
-                <li class="{{ active3 }}"><a href="/category/">栏目</a></li>
-                <li class="{{ active4 }}"><a href="comment.html">评论</a></li>
-                <li class="{{ active5 }}"><a data-toggle="tooltip" data-placement="bottom" title="网站暂无留言功能">留言</a></li>
+                <li class="{{ active3 }}"><a href="{{ url_for("admin.admin_type") }}">分类</a></li>
+                <li class="{{ active4 }}"><a href="{{ url_for("admin.admin_tags") }}">标签</a></li>
+                <li class="{{ active5 }}"><a href="{{ url_for("admin.admin_comments") }}">评论</a></li>
+                <li class="{{ active6 }}"><a data-toggle="tooltip" data-placement="bottom" title="网站暂无留言功能">留言</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li><a class="dropdown-toggle" id="otherMenu" data-toggle="dropdown" aria-haspopup="true"
@@ -243,6 +244,50 @@
         </div>
     </div>
 </div>
+<!--查看评论模态框-->
+<div class="modal fade" id="seeComment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">查看评论</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table" style="margin-bottom:0px;">
+                    <thead>
+                    <tr></tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td wdith="20%">评论ID:</td>
+                        <td width="80%" class="see-comment-id"></td>
+                    </tr>
+                    <tr>
+                        <td wdith="20%">评论文章:</td>
+                        <td width="80%" class="see-comment-page"></td>
+                    </tr>
+                    <tr>
+                        <td wdith="20%">评论内容:</td>
+                        <td width="80%" class="see-comment-content"></td>
+                    </tr>
+                     <tr>
+                        <td wdith="20%">用户名:</td>
+                        <td width="80%" class="see-comment-address"></td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr></tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="close" data-dismiss="modal">朕已阅</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--右键菜单列表-->
 <div id="rightClickMenu">
     <ul class="list-group rightClickMenuList">
