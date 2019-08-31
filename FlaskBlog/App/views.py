@@ -160,7 +160,7 @@ def admin_article(page):
     return render_template("admin/article.html", **data)
 
 
-# 文章修改
+# 后台文章修改
 @admin.route("/admin/updatearticle/<int:id>/", methods=["GET", "POST"])
 def update_article(id):
     if request.method == "GET":
@@ -201,7 +201,7 @@ def update_article(id):
         return redirect(url_for("admin.update_article", id=id))
 
 
-# 文章删除
+# 后台文章删除
 @admin.route('/admin/delarticle/')
 def del_article():
     article_id = request.args.get("article_id")
@@ -225,7 +225,7 @@ def del_article():
     return jsonify(data)
 
 
-# 文章增加
+# 后台文章增加
 @admin.route('/admin/addarticle/', methods=["GET", "POST"])
 def add_article():
     if request.method == "GET":
@@ -263,7 +263,7 @@ def add_article():
         return redirect(url_for("admin.admin_article", page=1))
 
 
-# 文章删除全部
+# 后台文章删除全部
 @admin.route("/admin/delallarticle/", methods=["POST"])
 def del_all_article():
     article_ids = request.form.getlist("checkbox[]")
@@ -273,3 +273,200 @@ def del_all_article():
         db.session.delete(article)
         db.session.commit()
     return redirect(url_for("admin.admin_article", page=1))
+
+
+# 后台分类管理
+@admin.route('/admin/type/')
+def admin_type():
+    types = ArticleType.query.filter().all()
+    data = {
+        "types": types,
+        "active3": "active",
+    }
+    return render_template("admin/category.html", **data)
+
+
+# 后台分类增加
+@admin.route('/admin/addtype/', methods=['POST'])
+def type_add():
+    name = request.form.get("name")
+    cname = request.form.get("cname")
+    data = {
+        "code": 1000,
+        "msg": "NO",
+    }
+    type = ArticleType.query.filter_by(name=name).first()
+    if not type:
+        type = ArticleType()
+        type.name = name
+        type.cname = cname
+        try:
+            db.session.add(type)
+            db.session.commit()
+            data['msg'] = "添加成功！"
+            data['id'] = type.id
+        except:
+            data['code'] = 1001
+            data['msg'] = "添加失败请重试！"
+
+            return jsonify(data)
+        return jsonify(data)
+    data['msg'] = "分类已存在！"
+    return jsonify(data)
+
+
+# 后台分类删除
+@admin.route('/admin/deltype/', methods=['POST'])
+def dle_type():
+    type_id = request.form.get("type_id")
+    data = {
+        "code": 1000,
+        "msg": "nice",
+    }
+    type = ArticleType.query.filter_by(id=type_id).first()
+    if type:
+        db.session.delete(type)
+        db.session.commit()
+        data['msg'] = "删除成功"
+        return jsonify(data)
+    data['code'] = 1001
+    data['msg'] = "此分类不存在"
+    return jsonify(data)
+
+
+# 后台分类修改
+@admin.route('/admin/updatetype/<int:id>/', methods=["POST", "GET"])
+def update_type(id):
+    if request.method == "GET":
+        type = ArticleType.query.get(id)
+        data = {
+            "active3": "active",
+            "type": type
+        }
+        return render_template("admin/update-category.html", **data)
+    elif request.method == "POST":
+        name = request.form.get('name')
+        cname = request.form.get('cname')
+        type = ArticleType.query.get(id)
+        type.name = name
+        type.cname = cname
+        db.session.commit()
+        data = {
+            "active3": "active",
+            "msg": "修改成功",
+            "type": type
+        }
+        return render_template("admin/update-category.html", **data)
+
+
+# 后台标签管理
+@admin.route('/admin/tags/', methods=["POST", "GET", "PUT"])
+def admin_tags():
+    if request.method == "GET":
+        tags = Tag.query.filter().all()
+        data = {
+            "tags": tags,
+            "active4": "active",
+        }
+        return render_template("admin/tags.html", **data)
+    elif request.method == "POST":
+        name = request.form.get("name")
+        data = {
+            "code": 1000,
+            "msg": "NO",
+        }
+        tag = Tag.query.filter_by(name=name).first()
+        if not tag:
+            tag = Tag()
+            tag.name = name
+            try:
+                db.session.add(tag)
+                db.session.commit()
+                data['msg'] = "添加成功！"
+                data['id'] = tag.id
+            except:
+                data['code'] = 1001
+                data['msg'] = "添加失败请重试！"
+                return jsonify(data)
+            return jsonify(data)
+        data['msg'] = "分类已存在！"
+        return jsonify(data)
+    elif request.method == "PUT":
+        tagid = request.form.get("tagid")
+        data = {
+            "code": 1000,
+            "msg": "nice",
+        }
+        tag = Tag.query.filter_by(id=tagid).first()
+        if type:
+            db.session.delete(tag)
+            db.session.commit()
+            data['msg'] = "删除成功"
+            return jsonify(data)
+        data['code'] = 1001
+        data['msg'] = "此分类不存在"
+        return jsonify(data)
+
+
+# 后台修改标签
+@admin.route("/admin/updatetag/<int:id>/", methods=['POST', "GET"])
+def update_tag(id):
+    if request.method == "GET":
+        tag = Tag.query.get(id)
+        data = {
+            "active4": "active",
+            "tag": tag
+        }
+        return render_template("admin/update-tag.html", **data)
+    elif request.method == "POST":
+        name = request.form.get('name')
+        tag = Tag.query.get(id)
+        tag.name = name
+        db.session.commit()
+        data = {
+            "active4": "active",
+            "msg": "修改成功",
+            "tag": tag
+        }
+        return render_template("admin/update-tag.html", **data)
+
+
+# 后台评论管理
+@admin.route('/admin/comments/', methods=['POST', "GET", "DELETE"])
+def admin_comments():
+    if request.method == "GET":
+        page = int(request.args.get("page", 1))
+        pagination = Comment.query.filter(Comment.article_id != None).paginate(page, per_page=10, error_out=False)
+        comments = pagination.items
+        data = {
+            "active5": "active",
+            "comments": comments,
+            "pagination": pagination,
+        }
+        return render_template("admin/comment.html", **data)
+    elif request.method == 'POST':
+        c_id = request.form.get("c_id")
+        comment = Comment.query.get(c_id)
+        data = {
+            "code": 1000,
+            "id": comment.id,
+            "article": comment.article1.title,
+            "content": comment.content,
+            "username": comment.username,
+        }
+        return jsonify(data)
+    elif request.method == "DELETE":
+        c_id = request.form.get("c_id")
+        comment = Comment.query.filter_by(id=c_id).first()
+        data = {
+            "code": 1000,
+            "msg": "",
+        }
+        if comment:
+            db.session.delete(comment)
+            db.session.commit()
+            data['msg'] = "删除成功！"
+            return jsonify(data)
+        data['code'] = 1001
+        data['msg'] = "没有此评论"
+        return jsonify(data)

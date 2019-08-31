@@ -7,16 +7,10 @@
                 <h1 class="page-header">添加</h1>
                 <form action="" method="post" autocomplete="off">
                     <div class="form-group">
-                        <label for="category-name">栏目名称</label>
+                        <label for="category-name">分类名称</label>
                         <input type="text" id="category-name" name="name" class="form-control" placeholder="在此处输入栏目名称"
                                required autocomplete="off">
                         <span class="prompt-text">这将是它在站点上显示的名字。</span></div>
-                    <div class="form-group">
-                        <label for="category-alias">栏目别名</label>
-                        <input type="text" id="category-alias" name="cname" class="form-control" placeholder="在此处输入栏目别名"
-                               required autocomplete="off">
-                        <span class="prompt-text">“别名”是在URL中使用的别称，它可以令URL更美观。通常使用小写，只能包含字母，数字和连字符（-）。</span>
-                    </div>
                     <button class="btn btn-primary" type="submit" name="submit" id="add_type">添加新栏目</button>
                 </form>
             </div>
@@ -29,22 +23,19 @@
                             <th><span class="glyphicon glyphicon-paperclip"></span> <span class="visible-lg">ID</span>
                             </th>
                             <th><span class="glyphicon glyphicon-file"></span> <span class="visible-lg">名称</span></th>
-                            <th><span class="glyphicon glyphicon-list-alt"></span> <span class="visible-lg">别名</span>
-                            </th>
                             <th><span class="glyphicon glyphicon-pushpin"></span> <span class="visible-lg">总数</span>
                             </th>
                             <th><span class="glyphicon glyphicon-pencil"></span> <span class="visible-lg">操作</span></th>
                         </tr>
                         </thead>
                         <tbody id="del_type_wei">
-                        {% for type in types %}
+                        {% for tag in tags %}
                             <tr>
-                                <td>{{ type.id }}</td>
-                                <td>{{ type.name }}</td>
-                                <td>{{ type.cname }}</td>
-                                <td>{{ type.articles | length }}</td>
-                                <td><a href="{{ url_for("admin.update_type", id=type.id) }}">修改</a> <a
-                                        rel="{{ type.id }}"
+                                <td>{{ tag.id }}</td>
+                                <td>{{ tag.name }}</td>
+                                <td>{{ tag.articles | length }}</td>
+                                <td><a href="{{ url_for("admin.update_tag", id=tag.id) }}">修改</a> <a
+                                        rel="{{ tag.id }}"
                                         class="del_type">删除</a></td>
                             </tr>
                         {% endfor %}
@@ -63,28 +54,27 @@
             // 新增分类
             $("#add_type").click(function () {
                 var name = $("#category-name").val();
-                var cname = $("#category-alias").val();
+                if (name == "") {
+                    alert("标签名不能为空！");
+                    return false;
+                }
                 data = {
                     name: name,
-                    cname: cname,
                 };
-                $.post("/admin/addtype/", data = data, function (data) {
+                $.post("/admin/tags/", data = data, function (data) {
                     if (data.code == 1000) {
                         alert(data.msg);
                         tbody = $("tbody");
                         tbody.append("<tr>\n" +
                             "<td>" + data.id + "</td>\n" +
                             "<td>" + name + "</td>\n" +
-                            "<td>" + cname + "</td>\n" +
                             "<td>" + "0" + "</td>\n" +
-                            "<td><a href='/admin/updatetype/" + data.id + "/'>修改</a> <a rel=" + data.id + " class='del_type'>删除</a></td>\n" +
+                            "<td><a href='/admin/updatetag/" + data.id + "/'>修改</a> <a rel=" + data.id + " class='del_type'>删除</a></td>\n" +
                             "</tr>");
-                        $("#category-alias").val("");
                         $("#category-name").val("");
                     } else {
                         alert(msg);
-                        window.location.reload();
-                        $("#category-alias").val("");
+                        location.reload();
                         $("#category-name").val("");
                     }
                 });
@@ -94,41 +84,33 @@
 
 
             $("#del_type_wei").delegate(".del_type", "click", function () {
-                typeid = $(this).attr("rel");
+                tagid = $(this).attr("rel");
                 data = {
-                    type_id: typeid
+                    tagid: tagid
                 };
                 del_type = $(this);
-                $.post("/admin/deltype/", data = data, function (data) {
-                    if (data.code == 1000) {
-                        alert(data.msg);
-                        del_type.parents("tr").remove();
-                    } else {
-                        alert(data.msg);
-                        location.reload();
-                    }
-                })
-            });
 
-            // 删除分类
-            {#$("#del_type_wei").click(function () {
-                typeid = $(this).find(".del_type").first().attr("rel");
-                alert(typeid);
-                /*
-                data = {
-                    type_id: typeid
-                };
-                del_type = $(this);
-                $.post("/admin/deltype/", data = data, function (data) {
-                    if (data.code == 1000) {
-                        alert(data.msg);
-                        del_type.parents("tr").remove();
-                    } else {
-                        alert(data.msg);
-                        location.reload();
+
+                $.ajax({
+                    url: "/admin/tags/",
+                    type: "put",
+                    data: data,
+                    success: function (data) {
+                        if (data.code == 1000) {
+                            alert(data.msg);
+                            del_type.parents("tr").remove();
+                        } else {
+                            alert(data.msg);
+                            window.location.reload()
+                        }
+                    },
+                    error: function (e) {
+                        alert("出错");
+                        window.location.reload()
                     }
-                })*/
-            })#}
+                });
+
+            });
         })
 
     </script>

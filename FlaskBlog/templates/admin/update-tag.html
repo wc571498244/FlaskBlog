@@ -1,0 +1,22 @@
+{% extends 'admin/base.html' %}
+{% block content %}
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
+        <h1 class="page-header">分类栏目</h1>
+        <form action="{{ url_for("admin.update_tag", id=tag.id) }}" method="post">
+            <input type="hidden" value="{{ tag.id }}">
+            <div class="form-group">
+                <label for="category-name">分类名称</label>
+                <input type="text" id="category-name" name="name" value="{{ tag.name }}" class="form-control"
+                       placeholder="在此处输入栏目名称" required autocomplete="off">
+                <span class="prompt-text">这将是它在站点上显示的名字。</span></div>
+            <button class="btn btn-primary" type="submit" name="submit">更新</button>
+        </form>
+    </div>
+{% endblock %}
+{% block MyJs %}
+    <script>
+        if (`{{ msg }}`) {
+            alert(`{{ msg }}`)
+        }
+    </script>
+{% endblock %}

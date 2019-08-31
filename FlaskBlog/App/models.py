@@ -7,6 +7,7 @@ from .exts import db
 class ArticleType(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(50))
+    cname = db.Column(db.String(50))
     articles = db.relationship("Article", backref="articletype", lazy=True)
 
 
