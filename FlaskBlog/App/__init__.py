@@ -1,4 +1,6 @@
 import os
+import uuid
+
 from flask import Flask
 from .views import blog, admin
 from .exts import init_exts
@@ -17,6 +19,8 @@ def create_app():
     db_uri = 'mysql+pymysql://root:root@localhost:3306/FlaskBlog'
     app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    # 设置秘钥
+    app.config['SECRET_KEY'] = str(uuid.uuid4())
     # 注册蓝图
     app.register_blueprint(blueprint=blog)
     app.register_blueprint(blueprint=admin)
