@@ -1,4 +1,6 @@
-from flask import Blueprint, render_template, request, redirect, url_for, jsonify
+import re
+
+from flask import Blueprint, render_template, request, redirect, url_for, jsonify, session, g
 from sqlalchemy import desc
 
 from .models import *
@@ -61,6 +63,12 @@ def detail(id):
     # 上一篇文章
     prev_article = Article.query.filter(Article.create_time.__gt__(article.create_time)).first()
 
+    # 是否点赞
+    likes = article.like
+    like = None
+    for i in likes:
+        if request.remote_addr == i.ip:
+            like = i
     # 点击量统计(一个ip15分钟内只能算一个点击)
     # ip个文章id都要算进来
     ip = request.remote_addr
@@ -71,7 +79,6 @@ def detail(id):
         cache.set(id, id, timeout=60 * 15)
         article.click_num += 1
         db.session.commit()
-
     data = {
         "title": "文章详情",
         "article": article,
@@ -79,7 +86,11 @@ def detail(id):
         "comments": comments,
         "prev_article": prev_article,
         "next_article": next_article,
+        'likes': likes
     }
+    if like:
+        data["like_ip"] = like.ip
+
     data.update(get_same_info())
     return render_template("blog/detail.html", **data)
 
@@ -142,8 +153,18 @@ def article_comment():
 # 后台管理首页
 @admin.route("/admin/index/")
 def admin_index():
+    articles = Article.query.filter().all()
+    comments = Comment.query.filter().all()
+    types = ArticleType.query.filter().all()
+    tags = Tag.query.filter().all()
     data = {
         "active1": "active",
+        "request": request,
+        "articles": articles,
+        "comments": comments,
+        "tags": tags,
+        "types": types,
+        "user": g.user,
     }
     return render_template("admin/index.html", **data)
 
@@ -341,7 +362,7 @@ def update_type(id):
         type = ArticleType.query.get(id)
         data = {
             "active3": "active",
-            "type": type
+            "type": type,
         }
         return render_template("admin/update-category.html", **data)
     elif request.method == "POST":
@@ -415,7 +436,7 @@ def update_tag(id):
         tag = Tag.query.get(id)
         data = {
             "active4": "active",
-            "tag": tag
+            "tag": tag,
         }
         return render_template("admin/update-tag.html", **data)
     elif request.method == "POST":
@@ -426,7 +447,7 @@ def update_tag(id):
         data = {
             "active4": "active",
             "msg": "修改成功",
-            "tag": tag
+            "tag": tag,
         }
         return render_template("admin/update-tag.html", **data)
 
@@ -470,3 +491,146 @@ def admin_comments():
         data['code'] = 1001
         data['msg'] = "没有此评论"
         return jsonify(data)
+
+
+# 删除多条评论
+@admin.route('/admin/delcomments/', methods=['POST'])
+def del_comments():
+    comments_id = request.form.getlist("checkbox[]")
+    for i in comments_id:
+        comment = Comment.query.get(i)
+        db.session.delete(comment)
+        db.session.commit()
+    return redirect(url_for("admin.admin_comments"))
+
+
+# 登录验证中间件
+@admin.before_request
+def login_check():
+    path = request.path
+    if path == "/admin/login/":
+        return render_template("admin/login.html")
+    if re.match(r"^/admin/(\w+/)+$", path):
+        user_id = session.get("user_id")
+        user = AdminUser.query.filter_by(id=user_id).first()
+        if user:
+            g.user = user
+            g.logs = user.logs[-5:]
+        else:
+            g.user = None
+            return redirect(url_for("admin.admin_login"))
+
+
+# 后台登录页面
+@admin.route("/admin/login/", methods=["GET"])
+def admin_login():
+    return render_template("admin/login.html")
+
+
+# 后台登录验证
+@admin.route("/logincheck/", methods=["POST"])
+def login_check():
+    username = request.form.get("username")
+    password = request.form.get("password")
+    user = AdminUser.query.filter_by(username=username).first()
+    data = {
+        "code": 1001,
+        "msg": "",
+    }
+    if user:
+        if password == user.password:
+            session['user_id'] = user.id
+            data['code'] = 1000
+            data['msg'] = "登录成功"
+            log = LoginLog()
+            log.ip = str(request.remote_addr) + ":" + str(request.environ["REMOTE_PORT"])
+            log.loginlogs = user
+            db.session.add(log)
+            db.session.commit()
+            return jsonify(data)
+        data['code'] = 1002
+        data['msg'] = "密码错误请重试"
+        return jsonify(data)
+    data['msg'] = "用户名不存在"
+    return jsonify(data)
+
+
+# 后台注销
+@admin.route("/admin/logout/")
+def admin_logout():
+    session.pop("user_id")
+    return redirect(url_for("admin.admin_login"))
+
+
+# 管理员个人信息显示
+@admin.route('/admin/perinfo/')
+def per_info():
+    try:
+        user = g.user
+    except:
+        user = None
+    print()
+    if user:
+        data = {
+            "code": 1000,
+            "username": user.username,
+            "name": user.name,
+            "phone": user.phone,
+        }
+        return jsonify(data)
+    return jsonify({"code": 1001, "msg": "请先登录！"})
+
+
+# 修改个人信息
+@admin.route('/admin/change_info/', methods=["POST"])
+def change_info():
+    old_pwd = request.form.get("old_pwd")
+    new_pwd = request.form.get("new_pwd")
+    pwd = request.form.get("pwd")
+    print(pwd, type(pwd))
+
+    user = g.user
+    print(user.password, type(user.password))
+    data = {
+        "code": 1000,
+        "msg": "",
+    }
+    if user.password != old_pwd:
+        data['code'] = 1001
+        data['msg'] = "密码错误！"
+
+        return jsonify(data)
+    if pwd != new_pwd:
+        data['code'] = 1002
+        data['msg'] = "两次密码不一致！"
+        return jsonify(data)
+
+    user.password = new_pwd
+    db.session.commit()
+    data['msg'] = "修改成功"
+    return jsonify(data)
+
+
+# 取消或点赞
+@blog.route('/articlelike/', methods=["POST"])
+def article_like():
+    a_id = request.form.get("a_id")
+    article = Article.query.get(a_id)
+    likes = LikeArticle.query.all()
+    like = None
+    for i in likes:
+        if request.remote_addr == i.ip:
+            like = i
+    if like:
+        db.session.delete(like)
+        db.session.commit()
+        print(-1)
+        return jsonify({"code": -1})
+    else:
+        like = LikeArticle()
+        like.ip = request.remote_addr
+        like.articles = article
+        db.session.add(like)
+        db.session.commit()
+        print(1)
+        return jsonify({"code": 1})

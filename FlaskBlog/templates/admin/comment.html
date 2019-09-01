@@ -1,7 +1,7 @@
 {% extends "admin/base.html" %}
 {% block content %}
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
-        <form action="/Comment/checkAll" method="post">
+        <form action="{{ url_for("admin.del_comments") }}" method="post">
             <h1 class="page-header">管理 <span class="badge">{{ comments | length }}</span></h1>
             <div class="table-responsive">
                 <table class="table table-striped table-hover">
@@ -123,12 +123,12 @@
                     success: function (data) {
                         if (data.code == 1000) {
                             alert(data.msg);
-
+                            that.parents("tr").remove();
                         } else {
                             alert(data.msg);
                             window.location.reload()
                         }
-                        that.parents("tr").remove();
+
                     },
                     error: function (e) {
                         alert("出错");
@@ -136,7 +136,21 @@
                     }
                 })
             })
+
+
+
+            // 删除全部评论
+            $("#del_all").click(function () {
+                if (window.confirm("此操作不可逆，是否确认？")) {
+
+                } else {
+                    return false;
+                }
+            })
+
         });
+
+
 
     </script>
 {% endblock %}

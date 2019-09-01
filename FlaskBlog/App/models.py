@@ -29,13 +29,13 @@ class Article(db.Model):
     img = db.Column(db.String(255), default="")
     article_type = db.Column(db.Integer, db.ForeignKey(ArticleType.id))
     comments = db.relationship("Comment", backref="article1", lazy=True)
+    like = db.relationship("LikeArticle", backref="articles", lazy=True)
 
 # 标签表
 class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(50))
     articles = db.relationship('Article', backref='tag1', secondary=article_tags, lazy=True)
-
 
 
 # 评论表
@@ -45,3 +45,28 @@ class Comment(db.Model):
     time = db.Column(db.DateTime, default=datetime.datetime.now())
     username = db.Column(db.String(30))
     article_id = db.Column(db.Integer, db.ForeignKey(Article.id))
+
+
+# 管理员用户
+class AdminUser(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    username = db.Column(db.String(30))
+    password = db.Column(db.String(255))
+    phone = db.Column(db.String(11))
+    name = db.Column(db.String(20))
+    logs = db.relationship('LoginLog', backref='loginlogs', lazy=True)
+
+
+# 登录记录表
+class LoginLog(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    ip = db.Column(db.String(100))
+    login_time = db.Column(db.DATETIME, default=datetime.datetime.now())
+    users = db.Column(db.Integer, db.ForeignKey(AdminUser.id))
+
+
+# 点赞表
+class LikeArticle(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    ip = db.Column(db.String(100))
+    article = db.Column(db.Integer, db.ForeignKey(Article.id))

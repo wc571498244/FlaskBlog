@@ -31,16 +31,18 @@
                     <a class="navbar-brand" href="/">YlsatCMS</a></div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="">消息 <span class="badge">1</span></a></li>
                         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                                aria-haspopup="true" aria-expanded="false">admin <span
+                                                aria-haspopup="true" aria-expanded="false">{{ g.user.username }} <span
                                 class="caret"></span></a>
                             <ul class="dropdown-menu dropdown-menu-left">
-                                <li><a title="查看或修改个人信息" data-toggle="modal" data-target="#seeUserInfo">个人信息</a></li>
-                                <li><a title="查看您的登录记录" data-toggle="modal" data-target="#seeUserLoginlog">登录记录</a></li>
+                                <li><a title="查看或修改个人信息" data-toggle="modal" data-target="#seeUserInfo" id="per_info">个人信息</a>
+                                </li>
+                                <li><a title="查看您的登录记录" data-toggle="modal" data-target="#seeUserLoginlog"
+                                       id="log_info">登录记录</a></li>
                             </ul>
                         </li>
-                        <li><a href="login.html" onClick="if(!confirm('是否确认退出？'))return false;">退出登录</a></li>
+                        <li><a href="{{ url_for("admin.admin_logout") }}"
+                               onClick="if(!confirm('是否确认退出？'))return false;">退出登录</a></li>
                         <li><a data-toggle="modal" data-target="#WeChat">帮助</a></li>
                     </ul>
                     <form action="" method="post" class="navbar-form navbar-right" role="search">
@@ -120,17 +122,20 @@
                         <tbody>
                         <tr>
                             <td wdith="20%">姓名:</td>
-                            <td width="80%"><input type="text" value="王雨" class="form-control" name="truename"
+                            <td width="80%"><input id='mname' type="text" value="王雨" class="form-control"
+                                                   name="truename"
                                                    maxlength="10" autocomplete="off"/></td>
                         </tr>
                         <tr>
                             <td wdith="20%">用户名:</td>
-                            <td width="80%"><input type="text" value="admin" class="form-control" name="username"
+                            <td width="80%"><input id='uname' type="text" value="admin" class="form-control"
+                                                   name="username"
                                                    maxlength="10" autocomplete="off"/></td>
                         </tr>
                         <tr>
                             <td wdith="20%">电话:</td>
-                            <td width="80%"><input type="text" value="18538078281" class="form-control" name="usertel"
+                            <td width="80%"><input id='phone' type="text" value="18538078281" class="form-control"
+                                                   name="usertel"
                                                    maxlength="13" autocomplete="off"/></td>
                         </tr>
                         <tr>
@@ -156,7 +161,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="submit" class="btn btn-primary">提交</button>
+                    <button type="submit" class="btn btn-primary" id="change_info">提交</button>
                 </div>
             </div>
         </form>
@@ -181,26 +186,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>::1:55570</td>
-                        <td>2016-01-08 15:50:28</td>
-                        <td>成功</td>
-                    </tr>
-                    <tr>
-                        <td>::1:64377</td>
-                        <td>2016-01-08 10:27:44</td>
-                        <td>成功</td>
-                    </tr>
-                    <tr>
-                        <td>::1:64027</td>
-                        <td>2016-01-08 10:19:25</td>
-                        <td>成功</td>
-                    </tr>
-                    <tr>
-                        <td>::1:57081</td>
-                        <td>2016-01-06 10:35:12</td>
-                        <td>成功</td>
-                    </tr>
+                    {% for log in g.logs %}
+                        <tr>
+                            <td>{{ log.ip }}</td>
+                            <td>{{ log.login_time }}</td>
+                            <td>成功</td>
+                        </tr>
+                    {% endfor %}
+
+
                     </tbody>
                 </table>
             </div>
@@ -271,7 +265,7 @@
                         <td wdith="20%">评论内容:</td>
                         <td width="80%" class="see-comment-content"></td>
                     </tr>
-                     <tr>
+                    <tr>
                         <td wdith="20%">用户名:</td>
                         <td width="80%" class="see-comment-address"></td>
                     </tr>
@@ -342,6 +336,46 @@
         var myFiles = _uploadEditor.getDialog("attachment");
         myFiles.open();
     }
+
+    // 个人信息
+    $("#per_info").click(function () {
+        $.get('/admin/perinfo/', data = {}, function (data) {
+            if (data.code == 1000) {
+                $("#uname").val(data.name);
+                $("#mname").val(data.username);
+                $("#phone").val(data.phone);
+            } else {
+                alert(data.msg)
+            }
+        })
+    })
+
+    $("#change_info").click(function () {
+        var old_pwd = $("input[name=old_password]").val();
+        var pwd = $("input[name=password]").val();
+        var new_pwd = $("input[name=new_password]").val();
+        data = {
+            'old_pwd': old_pwd,
+            'new_pwd': new_pwd,
+            'pwd': pwd,
+        };
+        $.post("/admin/change_info/", data = data, function (data) {
+            if (data.code == 1000) {
+                alert(data.msg);
+                window.location.reload()
+            } else {
+                alert(data.msg);
+                $("input[name=old_password]").val("");
+                $("input[name=password]").val("");
+                $("input[name=new_password]").val("");
+            }
+
+        });
+
+
+        return false;
+    })
+
 </script>
 {% block MyJs %}
 

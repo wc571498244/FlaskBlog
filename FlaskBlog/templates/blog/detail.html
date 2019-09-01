@@ -36,11 +36,7 @@
                 </div>
             </div>
             <div class="share">
-                <p class="diggit"><a
-                        href="JavaScript:makeRequest('/e/public/digg/?classid=3&amp;id=19&amp;dotop=1&amp;doajax=1&amp;ajaxarea=diggnum','EchoReturnedText','GET','');">
-                    很赞哦！ </a>(<b id="diggnum">
-                    <script type="text/javascript" src="/e/public/ViewClick/?classid=2&id=20&down=5"></script>
-                    13</b>)
+                <p class="diggit" id="like"><a href="">很赞哦！ </a>(<b id="diggnum">{{ likes | length }}</b>)
                 </p>
             </div>
             <div class="nextinfo">
@@ -109,6 +105,7 @@
     <script>
 
         $(function () {
+            // 提交评论
             $('#submit').click(function () {
                 username = $("#username").val();
                 saytext = $("#saytext").val();
@@ -142,6 +139,32 @@
                 $("#saytext").val("");
                 return false;
             })
+
+            // 是否点赞
+            var like_ip = `{{ like_ip }}`;
+            if (like_ip != `{{ request.remote_addr }}`) {
+                $("#like").addClass("not-like");
+            }
+
+            $("#like").click(function () {
+                var a_id = `{{ article.id }}`;
+                data = {
+                    a_id: a_id,
+                };
+
+                var num = parseInt($("#diggnum").html())
+                $.post('/articlelike/', data = data, function (data) {
+                    if (data.code == 1) {
+                        $("#like").removeClass("not-like");
+                        $("#diggnum").html(num + 1);
+                    } else {
+                        $("#like").addClass("not-like");
+                        $("#diggnum").html(num - 1);
+                    }
+                });
+                return false;
+            })
+
         })
 
     </script>
